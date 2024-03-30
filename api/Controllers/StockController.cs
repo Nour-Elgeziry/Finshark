@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using api.Data;
 using api.Mappers;
+using api.Dtos.Stock;
 using Microsoft.AspNetCore.Mvc;
 
 namespace api.Controllers
@@ -29,6 +30,18 @@ namespace api.Controllers
             if (stock == null) return NotFound();
 
             return Ok(stock.ToStockDto());
+        }
+
+        [HttpPost]
+        public IActionResult Create([FromBody] CreateStockRequestDto stockDto)
+        {
+            var stock = stockDto.ToStockFromCreateDto();
+            _context.Add(stock);
+            _context.SaveChanges();
+
+            return CreatedAtAction(nameof(GetById), new { id = stock.Id }, stock.ToStockDto());
+
+
         }
     }
 }
