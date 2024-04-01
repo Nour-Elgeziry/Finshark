@@ -7,6 +7,7 @@ using api.Interfaces;
 using api.Mappers;
 using Microsoft.EntityFrameworkCore;
 using api.Models;
+using api.Dtos.Comment;
 
 namespace api.Repositories
 {
@@ -38,6 +39,22 @@ namespace api.Repositories
             _context.Comments.Remove(comment);
             await _context.SaveChangesAsync();
             return comment;
+        }
+
+        public async Task<Comment?> UpdateAsync(int id, UpdateCommentDto updateDto)
+        {
+            var comment = await _context.Comments.FirstOrDefaultAsync(c => c.Id == id);
+            if (comment == null) return null;
+
+            comment.Title = updateDto.Title;
+            comment.Content = updateDto.Content;
+            await _context.SaveChangesAsync();
+            return comment;
+        }
+
+        public async Task<bool> CommentExists(int id)
+        {
+            return await _context.Comments.AnyAsync(c => c.Id == id);
         }
     }
 }
