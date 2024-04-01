@@ -7,10 +7,11 @@ using api.Dtos.Stock;
 using api.Interfaces;
 using api.Mappers;
 using Microsoft.EntityFrameworkCore;
-using Models;
+using api.Models;
 
 namespace api.Repositories
 {
+
 
     public class StockRepository(ApplicationDBContext context) : IStockRepository
     {
@@ -18,12 +19,12 @@ namespace api.Repositories
 
         public async Task<List<Stock>> GetAllAsync()
         {
-            return await _context.Stocks.ToListAsync();
+            return await _context.Stocks.Include(s => s.Comments).ToListAsync();
         }
 
         public async Task<Stock?> GetByIdAsync(int id)
         {
-            return await _context.Stocks.FirstOrDefaultAsync(s => s.Id == id);
+            return await _context.Stocks.Include(s => s.Comments).FirstOrDefaultAsync(s => s.Id == id);
         }
 
         public async Task<Stock> CreateAsync(Stock stockModel)

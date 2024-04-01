@@ -149,3 +149,7 @@
 /Users/nourelgeziry/Desktop/My WebApp Projects/FinShark/api/bin/Debug/net8.0/runtimes/win-x64/native/k5sprt64.dll
 /Users/nourelgeziry/Desktop/My WebApp Projects/FinShark/api/bin/Debug/net8.0/runtimes/win-x64/native/krb5_64.dll
 /Users/nourelgeziry/Desktop/My WebApp Projects/FinShark/api/bin/Debug/net8.0/runtimes/win-x64/native/krbcc64.dll
+/Users/nourelgeziry/Desktop/My WebApp Projects/FinShark/api/bin/Debug/net8.0/Microsoft.AspNetCore.JsonPatch.dll
+/Users/nourelgeziry/Desktop/My WebApp Projects/FinShark/api/bin/Debug/net8.0/Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
+/Users/nourelgeziry/Desktop/My WebApp Projects/FinShark/api/bin/Debug/net8.0/Newtonsoft.Json.dll
+/Users/nourelgeziry/Desktop/My WebApp Projects/FinShark/api/bin/Debug/net8.0/Newtonsoft.Json.Bson.dll

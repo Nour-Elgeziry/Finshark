@@ -1,7 +1,7 @@
 using System.ComponentModel.DataAnnotations.Schema;
 
 
-namespace Models
+namespace api.Models
 {
     public class Stock
     {
@@ -18,11 +18,6 @@ namespace Models
 
         public long MarketCap { get; set; }
 
-        public List<Comment> Comments = [];
-
-
-
-
-
+        public List<Comment> Comments { get; set; } = new List<Comment>();
     }
 }
