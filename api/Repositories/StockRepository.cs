@@ -23,8 +23,15 @@ namespace api.Repositories
             var stocks = _context.Stocks.Include(s => s.Comments).AsQueryable();
             if (!string.IsNullOrWhiteSpace(query.Symbol)) stocks = stocks.Where(s => s.Symbol == query.Symbol);
             if (!string.IsNullOrWhiteSpace(query.CompanyName)) stocks = stocks.Where(s => s.CompanyName == query.CompanyName);
+            if (!string.IsNullOrWhiteSpace(query.SortBy))
+            {
+                //symbol sorting just for example
+                if (query.SortBy == "symbol")
+                {
+                    stocks = query.IsDescending ? stocks.OrderByDescending(s => s.Symbol) : stocks.OrderBy(s => s.Symbol);
+                }
+            }
             return await stocks.ToListAsync();
-
         }
 
         public async Task<Stock?> GetByIdAsync(int id)
