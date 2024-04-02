@@ -21,6 +21,7 @@ namespace api.Repositories
         public async Task<List<Stock>> GetAllAsync(QueryObject query)
         {
             var stocks = _context.Stocks.Include(s => s.Comments).AsQueryable();
+
             if (!string.IsNullOrWhiteSpace(query.Symbol)) stocks = stocks.Where(s => s.Symbol == query.Symbol);
             if (!string.IsNullOrWhiteSpace(query.CompanyName)) stocks = stocks.Where(s => s.CompanyName == query.CompanyName);
             if (!string.IsNullOrWhiteSpace(query.SortBy))
@@ -31,7 +32,9 @@ namespace api.Repositories
                     stocks = query.IsDescending ? stocks.OrderByDescending(s => s.Symbol) : stocks.OrderBy(s => s.Symbol);
                 }
             }
-            return await stocks.ToListAsync();
+            //eg: pageNumber = 2, pageSize = 10 => (2 - 1) * 10 = 10 ie 10th to 19th
+            var skipNumber = (query.PageNumber - 1) * query.PageSize;
+            return await stocks.Skip(skipNumber).Take(query.PageSize).ToListAsync();
         }
 
         public async Task<Stock?> GetByIdAsync(int id)
